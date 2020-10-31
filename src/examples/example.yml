@@ -1,13 +1,19 @@
-description: >
-  Sample example description.
-# Provide a use-case based example for using this orb.
-# Everything in the `usage` section will be displayed in the orb registry.
-# Comments are not retained.
+description: Example of using commitlint orb
+version: 2.1
 usage:
-  version: 2.1
-  orbs:
-    <orb-name>: <namespace>/<orb-name>@1.2.3
-  workflows:
-    use-my-orb:
-      jobs:
-        - <orb-name>/<job-name>
+  jobs:
+  install-node-example:
+    docker:
+      - image: 'cimg/base:stable'
+    steps:
+      - checkout
+      - node/install:
+          install-yarn: true
+      - run: node --version
+orbs:
+  node: circleci/node@x.y
+  commitlint-orb: commitlint-orb/commitlint-orb
+workflows:
+  test_my_app:
+    jobs:
+      - install-node-example

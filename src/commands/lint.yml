@@ -1,0 +1,11 @@
+description: >
+  Runs commitlint on the latest commit message.
+# What will this command do?
+# Descriptions should be short, simple, and clear.
+steps:
+  - run:
+      name: Hello Greeting
+      command:
+      echo 'export COMMIT_MESSAGE=$(git log -1 --pretty=format:"%s")' >> $BASH_ENV
+      source $BASH_ENV
+      echo "$COMMIT_MESSAGE" | npx commitlint
